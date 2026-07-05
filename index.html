@@ -7,72 +7,104 @@
 <style>
 body {
   margin: 0;
-  background: #111;
+  background: #0b0b0b;
   font-family: "Noto Sans JP", sans-serif;
+  overflow: hidden;
 }
 
+/* SVG表示エリア */
 #lcd {
   width: 100%;
   height: 100vh;
   border: none;
+  display: block;
 }
-  #notice {
+
+/* 電車がまいります */
+#notice {
   position: absolute;
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-  
-  background: black;
+
+  background: #000;
   color: #00ffcc;
-  padding: 10px 30px;
-  font-size: 28px;
-  letter-spacing: 4px;
-  
+  padding: 14px 40px;
+  font-size: 32px;
+  letter-spacing: 6px;
+
+  border: 2px solid #00ffcc;
+
   opacity: 0;
-  animation: floatIn 4s infinite;
+  animation: floatIn 5s infinite;
 }
 
+/* フロート演出 */
 @keyframes floatIn {
   0% {
     opacity: 0;
-    transform: translate(-50%, 20px);
+    transform: translate(-50%, 30px);
   }
-  20% {
+  15% {
     opacity: 1;
     transform: translate(-50%, 0);
   }
-  60% {
+  70% {
     opacity: 1;
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -20px);
+    transform: translate(-50%, -30px);
   }
 }
-</style>
 
+/* 上部タイトルバー */
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #111;
+  color: #aaa;
+  padding: 8px 16px;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+</style>
 </head>
+
 <body>
 
-<!-- 発車標SVG表示枠 -->
+<div id="header">KENTRAS REAL-TIME DISPLAY SYSTEM</div>
+
+<!-- SVG表示 -->
 <img id="lcd" src="assets/svg/A27千葉.svg">
 
-<script>
-// 仮：駅切替関数
-function showStation(file) {
-  document.getElementById("lcd").src =
-    "assets/svg/" + file + ".svg";
-}
-  <div id="notice">電車がまいります</div>
+<!-- 放送 -->
+<div id="notice">電車がまいります</div>
 
-// テスト（3秒後に切替）
+<script>
+
+// ===== 駅切替システム =====
+function showStation(name) {
+  document.getElementById("lcd").src =
+    "assets/svg/" + name + ".svg";
+}
+
+// ===== デモシナリオ =====
 setTimeout(() => {
   showStation("A14東菅野");
 }, 3000);
-  setTimeout(() => {
-  showStation("A14東菅野");
-  document.getElementById("notice").style.display = "block";
-}, 3000);
+
+setTimeout(() => {
+  showStation("A27千葉");
+}, 7000);
+
+setTimeout(() => {
+  showStation("A35茂原");
+}, 11000);
+
 </script>
 
 </body>
