@@ -2,63 +2,24 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>KENTRAS DISPLAY</title>
+<title>KENTRAS INTERACTIVE</title>
 
 <style>
 body {
   margin: 0;
-  background: #0b0b0b;
+  background: #0a0a0a;
   font-family: "Noto Sans JP", sans-serif;
   overflow: hidden;
 }
 
-/* SVG表示エリア */
+/* 発車標 */
 #lcd {
   width: 100%;
   height: 100vh;
-  border: none;
   display: block;
 }
 
-/* 電車がまいります */
-#notice {
-  position: absolute;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  background: #000;
-  color: #00ffcc;
-  padding: 14px 40px;
-  font-size: 32px;
-  letter-spacing: 6px;
-
-  border: 2px solid #00ffcc;
-
-  opacity: 0;
-  animation: floatIn 5s infinite;
-}
-
-/* フロート演出 */
-@keyframes floatIn {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 30px);
-  }
-  15% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -30px);
-  }
-}
-
-/* 上部タイトルバー */
+/* 上部バー */
 #header {
   position: absolute;
   top: 0;
@@ -68,7 +29,54 @@ body {
   color: #aaa;
   padding: 8px 16px;
   font-size: 14px;
-  letter-spacing: 2px;
+}
+
+/* 電車がまいります */
+#notice {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  color: #00ffcc;
+  padding: 12px 36px;
+  font-size: 28px;
+  border: 2px solid #00ffcc;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ボタンパネル */
+#panel {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  background: #111;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00ffcc;
+  color: black;
+}
+
+/* フェード */
+.fade {
+  animation: fade 0.4s;
+}
+
+@keyframes fade {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
 }
 
 </style>
@@ -76,34 +84,45 @@ body {
 
 <body>
 
-<div id="header">KENTRAS REAL-TIME DISPLAY SYSTEM</div>
+<div id="header">KENTRAS INTERACTIVE DISPLAY</div>
 
-<!-- SVG表示 -->
+<!-- 発車標 -->
 <img id="lcd" src="assets/svg/A27千葉.svg">
 
 <!-- 放送 -->
 <div id="notice">電車がまいります</div>
 
+<!-- 操作パネル -->
+<div id="panel">
+  <button onclick="go('A01東京')">A01 東京</button>
+  <button onclick="go('A14東菅野')">A14 東菅野</button>
+  <button onclick="go('A27千葉')">A27 千葉</button>
+  <button onclick="go('A35茂原')">A35 茂原</button>
+</div>
+
 <script>
 
-// ===== 駅切替システム =====
-function showStation(name) {
-  document.getElementById("lcd").src =
-    "assets/svg/" + name + ".svg";
+const lcd = document.getElementById("lcd");
+const notice = document.getElementById("notice");
+
+// 駅切替関数
+function go(station) {
+
+  // フェード演出
+  lcd.classList.remove("fade");
+  void lcd.offsetWidth;
+  lcd.classList.add("fade");
+
+  // SVG変更
+  lcd.src = "assets/svg/" + station + ".svg";
+
+  // 放送表示
+  notice.style.opacity = 1;
+
+  setTimeout(() => {
+    notice.style.opacity = 0;
+  }, 2000);
 }
-
-// ===== デモシナリオ =====
-setTimeout(() => {
-  showStation("A14東菅野");
-}, 3000);
-
-setTimeout(() => {
-  showStation("A27千葉");
-}, 7000);
-
-setTimeout(() => {
-  showStation("A35茂原");
-}, 11000);
 
 </script>
 
