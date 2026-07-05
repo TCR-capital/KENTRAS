@@ -16,6 +16,39 @@ body {
   height: 100vh;
   border: none;
 }
+  #notice {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: black;
+  color: #00ffcc;
+  padding: 10px 30px;
+  font-size: 28px;
+  letter-spacing: 4px;
+  
+  opacity: 0;
+  animation: floatIn 4s infinite;
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
 </style>
 
 </head>
@@ -30,10 +63,15 @@ function showStation(file) {
   document.getElementById("lcd").src =
     "assets/svg/" + file + ".svg";
 }
+  <div id="notice">電車がまいります</div>
 
 // テスト（3秒後に切替）
 setTimeout(() => {
   showStation("A14東菅野");
+}, 3000);
+  setTimeout(() => {
+  showStation("A14東菅野");
+  document.getElementById("notice").style.display = "block";
 }, 3000);
 </script>
 
