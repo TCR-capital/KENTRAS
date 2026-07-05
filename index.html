@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>KENTRAS DISPLAY</title>
+
+<style>
+body {
+  margin: 0;
+  background: #111;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+#lcd {
+  width: 100%;
+  height: 100vh;
+  border: none;
+}
+</style>
+
+</head>
+<body>
+
+<!-- 発車標SVG表示枠 -->
+<img id="lcd" src="assets/svg/A27千葉.svg">
+
+<script>
+// 仮：駅切替関数
+function showStation(file) {
+  document.getElementById("lcd").src =
+    "assets/svg/" + file + ".svg";
+}
+
+// テスト（3秒後に切替）
+setTimeout(() => {
+  showStation("A14東菅野");
+}, 3000);
+</script>
+
+</body>
+</html>
