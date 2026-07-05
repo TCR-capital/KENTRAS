@@ -17,6 +17,7 @@ body {
   width: 100%;
   height: 100vh;
   display: block;
+  background: black;
 }
 
 /* 上部バー */
@@ -43,6 +44,7 @@ body {
   font-size: 28px;
   border: 2px solid #00ffcc;
   opacity: 0;
+  transition: opacity 0.4s;
   pointer-events: none;
 }
 
@@ -78,7 +80,6 @@ button:hover {
   0% { opacity: 0.2; }
   100% { opacity: 1; }
 }
-
 </style>
 </head>
 
@@ -105,23 +106,31 @@ button:hover {
 const lcd = document.getElementById("lcd");
 const notice = document.getElementById("notice");
 
-// 駅切替関数
+/* 完全版：巨大SVGでも破綻しないプリロード方式 */
 function go(station) {
 
-  // フェード演出
+  // フェードをリセット
   lcd.classList.remove("fade");
-  void lcd.offsetWidth;
-  lcd.classList.add("fade");
 
-  // SVG変更
-  lcd.src = "assets/svg/" + station + ".svg";
+  // 新しい画像をプリロード
+  const img = new Image();
+  img.src = "assets/svg/" + station + ".svg";
 
-  // 放送表示
-  notice.style.opacity = 1;
+  img.onload = () => {
 
-  setTimeout(() => {
-    notice.style.opacity = 0;
-  }, 2000);
+    // 読み込み完了後に差し替え
+    lcd.src = img.src;
+
+    // フェード開始
+    void lcd.offsetWidth;
+    lcd.classList.add("fade");
+
+    // 放送表示
+    notice.style.opacity = 1;
+    setTimeout(() => {
+      notice.style.opacity = 0;
+    }, 2000);
+  };
 }
 
 </script>
