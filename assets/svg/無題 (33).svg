@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 140" width="670px" xmlns:bx="https://boxy-svg.com" height="140px">
+  <defs>
+    <bx:guide x="1602.585" y="-1161.472" angle="90"/>
+    <bx:export>
+      <bx:file format="svg" path="無題.svg" excluded="true"/>
+      <bx:file format="svg" path="無題 2.svg" excluded="true"/>
+      <bx:file format="svg" path="無題 3.svg" excluded="true"/>
+      <bx:file format="svg" path="無題 4.svg" excluded="true"/>
+    </bx:export>
+  </defs>
+  <rect x="20" y="20" width="100" height="100" style="paint-order: fill; fill: color(srgb-linear 0.048 0.283 1); pointer-events: none;" rx="0" ry="0"/>
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 40px; font-weight: 700; text-anchor: middle; white-space: pre;" transform="matrix(1.0588, 0, 0, 1.0588, -2.743355, 10.186838)"><tspan x="69.647" y="49.945">A<tspan x="69.64700317382812" dy="1em">​</tspan>21<tspan x="69.64700317382812" dy="1em">​</tspan></tspan></text>
+  <text style="fill: rgb(241, 241, 241); font-family: Arial, sans-serif; font-size: 66px; font-weight: 700; white-space: pre;" x="155.227" y="71.52">長作町 </text>
+  <text style="fill: rgb(241, 241, 241); font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; white-space: pre;" x="156.672" y="119.265">For  Nagasakucho</text>
+</svg>
